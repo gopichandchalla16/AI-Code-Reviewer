@@ -26,7 +26,6 @@ btn_click = st.button("Run & See the Magic")
 
 if btn_click:
     if user_input.strip():
-        with st.spinner("🤖 AI is thinking..."):
         # Generate response using the Gemini model
         response = gemini_model.generate_content(user_input)
         st.write(response.text)
