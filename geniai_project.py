@@ -20,7 +20,7 @@ gemini_model = genai.GenerativeModel(model_name="models/gemini-1.5-pro", system_
 
 # Streamlit UI setup
 st.title("Interactive Python Tutor")
-user_input = st.text_area(label="Enter your query/issue", placeholder="Explain the concept of for loops")
+user_input = st.text_area(label="Enter your query/issue", placeholder="Find bugs in my Python code")
 
 btn_click = st.button("Click Me!")
 
