@@ -18,7 +18,9 @@ An interactive web-based Python tutor built using Streamlit and Google Generativ
 🏗️ Tech Stack
 
 Frontend: Streamlit
+
 Backend: Python
+
 AI Integration: Google Gemini API
 
 
@@ -37,8 +39,11 @@ Error Handling – The app provides helpful debugging suggestions if errors occu
 
 
 📬 Contact
+
 💡 Author: Gopichand
+
 🔗 GitHub: https://github.com/gopichandchalla16
+
 📧 Email: gopichandchalla516@gmail.com
 
 
