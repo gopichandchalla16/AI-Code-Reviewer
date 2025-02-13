@@ -32,6 +32,3 @@ if btn_click:
     else:
         st.warning("Please enter a query.")
 
-
-!jupyter nbconvert --to script your_notebook.ipynb
-
