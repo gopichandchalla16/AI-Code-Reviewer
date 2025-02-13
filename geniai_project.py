@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/10a-Ictfg_Zr10RTjGSmIJrJgzcV88VFi
 """
 
-! pip install google-generativeai
+!pip install google-generativeai
 
 !pip install streamlit
 
@@ -65,7 +65,7 @@ from IPython.display import Markdown
 
 genai.configure(api_key="AIzaSyDsDuCqRADUrl1XG7_VxZDtd_nTswxEmh8")
 
-sys_prompt = """You are a Python rogramming tutuor. You can only resolove Python Programming related Queries
+sys_prompt = """You are a Python Programming tutuor. You can only resolove Python Programming related Queries
             In case if someone asks as queries which are not related to Python Programming, politely tell them to ask related queries only
 """
 
@@ -106,47 +106,3 @@ if btn_click == True:
 
 !jupyter nbconvert --to script your_notebook.ipynb
 
-"""# **OPEN AI PROJECT**
-
-# Installing the openai package
-"""
-
-!pip install openai
-
-"""Importing OpenAI"""
-
-from openai import OpenAI
-
-OPENAI_API_KEY = "THIS_IS_A_DUMMY_KEY"
-
-# genai.configure(api_key) = "xxxxxxxxxxx"
-
-client = OpenAI(api_key = "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") # Removed the unexpected indentation
-
-client = OpenAI(api_key = "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")
-
-client.models.list()
-
-for model in client.models.list():
-  print(model.id)
-
-!pip install openai
-
-import openai
-
-# Set up your API key
-openai.api_key = "your_api_key_here"
-
-# Make the request
-response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {
-            "role": "user",
-            "content": "Tell me 5 facts about the Indian Education System."
-        }
-    ]
-)
-
-# Print the response
-print(response["choices"][0]["message"]["content"])
