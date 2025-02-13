@@ -1,6 +1,6 @@
-# Interactive-Python-Tutor
+# AI Code Reviewer
 
-An interactive web-based Python tutor built using Streamlit and Google Generative AI (Gemini API), allowing users to write, run, and debug Python code with AI assistance.
+An interactive web-based AI Assistant built using Streamlit and Google Generative AI (Gemini API), allowing users to write, run, and debug Python code with AI assistance.
 
 🚀 Features
 
@@ -35,7 +35,7 @@ AI Assistance – Users can ask the AI to explain, debug, or optimize their code
 Error Handling – The app provides helpful debugging suggestions if errors occur.
 
 
-🎮 Demo link -  https://interactive-python-tutor.streamlit.app/
+🎮 Demo link - https://ai-code-analyzer.streamlit.app/ 
 
 
 📬 Contact
