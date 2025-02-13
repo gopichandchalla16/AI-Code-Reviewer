@@ -8,38 +8,62 @@ genai.configure(api_key=api_key)
 
 # Setting up system prompt for the AI Code Reviewer
 sys_prompt = """
-You are an AI-powered Python Code Reviewer. Your task is to analyze the provided Python code, identify bugs, errors, or areas of improvement, and provide a corrected version of the code. Follow these steps:
-1. Analyze the code for syntax errors, logical errors, or inefficiencies.
-2. Provide a detailed explanation of the issues found.
-3. Suggest fixes and provide the corrected code snippet.
-4. If the code is correct, confirm that no issues were found.
+You are an AI-powered Python Code Reviewer. Your task is to:
+1. Analyze the provided Python code for bugs, errors, or areas of improvement.
+2. Identify and list all potential issues in the code.
+3. Provide corrected code snippets for each issue.
+4. Explain the fixes in a clear and concise manner.
+
+If the input is not Python code, politely ask the user to provide valid Python code for review.
 """
 
 # Initialize the AI model
 gemini_model = genai.GenerativeModel(model_name="models/gemini-1.5-pro", system_instruction=sys_prompt)
 
 # Streamlit UI setup
-st.title("AI Code Reviewer 🐍")
-st.markdown("**Submit your Python code below and get instant feedback on bugs and fixes!**")
+st.title("AI Code Reviewer 🛠️")
+st.markdown("""
+    <style>
+    .stTextArea textarea {
+        font-family: monospace;
+        font-size: 14px;
+    }
+    .stButton button {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+    }
+    .stButton button:hover {
+        background-color: #45a049;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-# User input for Python code
+st.markdown("### Submit your Python code for review")
+st.markdown("Enter your Python code below. The AI will analyze it for bugs and provide fixes.")
+
+# Text area for code input
 user_code = st.text_area(
-    label="Enter your Python code here:",
-    placeholder="Paste your Python code here...",
+    label="Python Code",
+    placeholder="Fix your Bugs Here...",
     height=300
 )
 
 # Button to trigger code review
-if st.button("Review My Code 🚀"):
+btn_click = st.button("Review My Code 🚀")
+
+if btn_click:
     if user_code.strip():
         # Generate response using the Gemini model
-        try:
-            response = gemini_model.generate_content(
-                f"Review the following Python code and provide feedback:\n\n{user_code}"
-            )
-            st.subheader("Code Review Results:")
-            st.write(response.text)
-        except Exception as e:
-            st.error(f"An error occurred while processing your request: {e}")
+        with st.spinner("Analyzing your code... Please wait."):
+            response = gemini_model.generate_content(f"Review this Python code and provide fixes:\n\n{user_code}")
+        
+        # Display the results
+        st.markdown("### Code Review Results")
+        st.markdown("**Issues Found and Fixes:**")
+        st.write(response.text)
     else:
         st.warning("Please enter some Python code to review.")
