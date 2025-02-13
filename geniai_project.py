@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/10a-Ictfg_Zr10RTjGSmIJrJgzcV88VFi
 """
 
-! pip install google-generativeai
+!pip install google-generativeai
 
 !pip install streamlit
 
