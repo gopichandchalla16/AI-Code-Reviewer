@@ -49,7 +49,7 @@ st.markdown("Enter your Python code below. The AI will analyze it for bugs and p
 user_code = st.text_area(
     label="Python Code",
     placeholder="Fix your Bugs Here...",
-    height=300
+    height=200
 )
 
 # Button to trigger code review
