@@ -3,7 +3,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Set up the Google Gemini API Key
-api_key = "YOUR_API_KEY_HERE"  # Replace with your actual API key
+api_key = "AIzaSyDsDuCqRADUrl1XG7_VxZDtd_nTswxEmh8" 
 genai.configure(api_key=api_key)
 
 # Setting up system prompt for the Python programming tutor
