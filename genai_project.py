@@ -8,62 +8,125 @@ genai.configure(api_key=api_key)
 
 # Setting up system prompt for the AI Code Reviewer
 sys_prompt = """
-You are an AI-powered Code Reviewer. Your task is to:
-1. Analyze any programming code for bugs, errors, or improvements
-2. Identify and list all potential issues
-3. Provide corrected code snippets
-4. Explain fixes clearly
+You are an expert AI Code Reviewer. Your tasks:
+1. Identify the programming language first
+2. Analyze code for bugs, security issues, and optimization opportunities
+3. List issues with severity levels (Critical/High/Medium/Low)
+4. Provide corrected code with explanations
+5. Suggest best practices and optimizations
+6. Format output with clear section headers
 
-If input isn't code, politely request valid code.
+For non-code inputs, politely request valid code.
 """
 
 # Initialize the AI model
 gemini_model = genai.GenerativeModel(model_name="models/gemini-1.5-pro", system_instruction=sys_prompt)
 
 # Streamlit UI setup
-st.title("AI Code Reviewer 🛠️")
-st.markdown("""
+st.set_page_config(page_title="AI Code Reviewer 🤖", page_icon=":computer:", layout="wide")
+
+# Custom CSS styling
+st.markdown(f"""
     <style>
-    .stTextArea textarea {
-        font-family: monospace;
+    .main {{
+        background-color: #f5f7fb;
+    }}
+    .header {{
+        padding: 2rem;
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }}
+    .stTextArea textarea {{
+        font-family: 'Fira Code', monospace;
         font-size: 14px;
-    }
-    .stButton button {
-        background-color: #4CAF50;
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        padding: 1rem;
+        border-radius: 8px;
+    }}
+    .stButton button {{
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
         color: white;
         font-weight: bold;
-        padding: 10px 20px;
-        border-radius: 5px;
+        padding: 12px 28px;
+        border-radius: 25px;
         border: none;
-    }
-    .stButton button:hover {
-        background-color: #45a049;
-    }
+        transition: all 0.3s;
+        width: 100%;
+    }}
+    .stButton button:hover {{
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+    }}
+    .review-container {{
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-top: 2rem;
+    }}
+    .language-badge {{
+        padding: 4px 12px;
+        border-radius: 20px;
+        background: #e0e7ff;
+        color: #4f46e5;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }}
     </style>
     """, unsafe_allow_html=True)
 
-st.markdown("### Submit your Python code for review")
-st.markdown("Enter your code below. The AI will analyze it for bugs and provide fixes.")
+# Header Section
+st.markdown("""
+<div class="header">
+    <h1 style="margin:0">AI Code Review Assistant 🤖</h1>
+    <p style="opacity:0.9; margin:0.5rem 0">Get instant code reviews for any programming language!</p>
+</div>
+""", unsafe_allow_html=True)
 
-# Text area for code input
-user_code = st.text_area(
-    label="Python Code",
-    placeholder="Fix your Bugs Here...",
-    height=200
-)
+# Main Content
+col1, col2 = st.columns([2, 3], gap="large")
 
-# Button to trigger code review
-btn_click = st.button("Review My Code 🚀")
+with col1:
+    st.markdown("### 📝 Paste Your Code")
+    user_code = st.text_area(
+        label="Code Input",
+        placeholder="// Paste your code here...\nfunction example() {\n  console.log('Hello World!');\n}",
+        height=400,
+        label_visibility="collapsed"
+    )
+    
+    if st.button("**Analyze Code** 🚀", use_container_width=True):
+        if not user_code.strip():
+            st.warning("Please enter some code to review")
+            st.stop()
 
-if btn_click:
+with col2:
     if user_code.strip():
-        # Generate response using the Gemini model
-        with st.spinner("Analyzing your code... Please wait."):
-            response = gemini_model.generate_content(f"Review this Python code and provide fixes:\n\n{user_code}")
-        
-        # Display the results
-        st.markdown("### Code Review Results")
-        st.markdown("**Issues Found and Fixes:**")
-        st.write(response.text)
-    else:
-        st.warning("Please enter some Python code to review.")
+        with st.spinner("🔍 Analyzing code. This might take a moment..."):
+            try:
+                response = gemini_model.generate_content(
+                    f"Code to review:\n```\n{user_code}\n```"
+                )
+                
+                with st.container(border=True):
+                    st.markdown("### 📋 Review Results")
+                    
+                    # Process and format the response
+                    review_content = response.text
+                    
+                    # Display in expandable sections
+                    with st.expander("🧩 Identified Issues", expanded=True):
+                        st.markdown(review_content.split("## Identified Issues")[1].split("## Corrected Code")[0])
+                        
+                    with st.expander("✨ Corrected Code", expanded=True):
+                        st.markdown(f"```\n{review_content.split('```')[1]}\n```")
+                        
+                    with st.expander("📚 Detailed Explanation", expanded=False):
+                        st.markdown(review_content.split("## Detailed Explanation")[1])
+                        
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
