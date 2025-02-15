@@ -8,13 +8,13 @@ genai.configure(api_key=api_key)
 
 # Setting up system prompt for the AI Code Reviewer
 sys_prompt = """
-You are an AI-powered Python Code Reviewer. Your task is to:
-1. Analyze the provided Python code for bugs, errors, or areas of improvement.
-2. Identify and list all potential issues in the code.
-3. Provide corrected code snippets for each issue.
-4. Explain the fixes in a clear and concise manner.
+You are an AI-powered Code Reviewer. Your task is to:
+1. Analyze any programming code for bugs, errors, or improvements
+2. Identify and list all potential issues
+3. Provide corrected code snippets
+4. Explain fixes clearly
 
-If the input is not Python code, politely ask the user to provide valid Python code for review.
+If input isn't code, politely request valid code.
 """
 
 # Initialize the AI model
@@ -43,7 +43,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 st.markdown("### Submit your Python code for review")
-st.markdown("Enter your Python code below. The AI will analyze it for bugs and provide fixes.")
+st.markdown("Enter your code below. The AI will analyze it for bugs and provide fixes.")
 
 # Text area for code input
 user_code = st.text_area(
