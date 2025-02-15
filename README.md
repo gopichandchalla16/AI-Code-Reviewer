@@ -38,13 +38,7 @@ Error Handling – The app provides helpful debugging suggestions if errors occu
 🎮 Demo link - https://ai-code-analyzer.streamlit.app/ 
 
 
-📬 Contact
 
-💡 Author: Gopichand
-
-🔗 GitHub: https://github.com/gopichandchalla16
-
-📧 Email: gopichandchalla516@gmail.com
 
 
 
