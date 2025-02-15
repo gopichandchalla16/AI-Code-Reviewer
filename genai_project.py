@@ -83,7 +83,7 @@ st.markdown(f"""
 st.markdown("""
 <div class="header">
     <h1 style="margin:0">AI Code Review Assistant 🤖</h1>
-    <p style="opacity:0.9; margin:0.5rem 0">Get instant code reviews for any programming language!</p>
+    <p style="opacity:0.9; margin:0.5rem 0">Get instant code reviews</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -91,10 +91,10 @@ st.markdown("""
 col1, col2 = st.columns([2, 3], gap="large")
 
 with col1:
-    st.markdown("### 📝 Paste Your Code")
+    st.markdown("### 📝 Fix your Bugs")
     user_code = st.text_area(
         label="Code Input",
-        placeholder="// Paste your code here...\nfunction example() {\n  console.log('Hello World!');\n}",
+        placeholder="// Fix your Bugs here...\nfunction example() {\n  console.log('Hello World!');\n}",
         height=400,
         label_visibility="collapsed"
     )
