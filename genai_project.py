@@ -111,9 +111,10 @@ col1, col2 = st.columns([2, 3], gap="large")
 with col1:
     st.subheader("📝 Enter Your Code Below")
     user_code = st.text_area(
-        "Code Input", """
-         Fix your Bugs
-}
+        "Code Input",
+        placeholder="Paste your Python code here. The AI will identify bugs and suggest fixes."
+    )
+
 """, height=400)
     
     analyze_button = st.button("Analyze Code 🚀", use_container_width=True)
