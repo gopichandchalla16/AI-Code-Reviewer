@@ -35,7 +35,7 @@ AI Assistance – Users can ask the AI to explain, debug, or optimize their code
 Error Handling – The app provides helpful debugging suggestions if errors occur.
 
 
-🎮 Demo link -
+🎮 Demo link - https://syntax-surgeon.streamlit.app/
 
 
 
