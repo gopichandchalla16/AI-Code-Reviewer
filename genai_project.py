@@ -112,7 +112,7 @@ with col1:
     st.subheader("📝 Enter Your Code Below")
     user_code = st.text_area(
         "Code Input",
-        placeholder="Paste your Python code here. The AI will identify bugs and suggest fixes.",
+        placeholder="Fix your Bugs Here.",
         height=400
     )
 
