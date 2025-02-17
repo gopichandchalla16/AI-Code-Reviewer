@@ -112,9 +112,7 @@ with col1:
     st.subheader("📝 Enter Your Code Below")
     user_code = st.text_area(
         "Code Input", """
-// Paste your code here...
-function example() {
-    console.log('Hello World!');
+         Fix your Bugs
 }
 """, height=400)
     
